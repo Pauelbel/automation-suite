@@ -114,7 +114,7 @@ class Logger:
         cookies_as_dict = dict(response.cookies)
         headers_as_dict = dict(response.headers)
         result_text = None
-
+        test_name = os.environ.get('PYTEST_CURRENT_TEST', 'Unknown Test')
         try:
             result_text = response.json()
         except ValueError:
@@ -132,7 +132,8 @@ class Logger:
             f"Response headers:\n{safe_json_dumps(headers_as_dict)}\n"
             f"Response cookies:\n{safe_json_dumps(cookies_as_dict)}\n"
             f"Response text:\n{safe_json_dumps(result_text)}\n"
-            f"Execution Time: {execution_time:.6f} seconds\n"
+            f"---------------- Execution Time -----------------\n"
+            f"Тест: {test_name} выполнялся {execution_time:.2f} секунды\n"
             f"\n----------\n"
         )
 
