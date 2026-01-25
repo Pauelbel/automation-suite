@@ -4,8 +4,7 @@ import json
 import os
 import time
 
-from handles import LOGGER, PRINT
-
+from handles import LOG_TO_FILE, PRINT
 
 class RestApiClient:
     """
@@ -59,8 +58,8 @@ class Logger:
 
     @classmethod
     def _write_log_to_file(cls, data: str):
-        if LOGGER:
-            os.makedirs(os.path.dirname(cls.FILE_NAME), exist_ok=True)  # Создаём папку logs, если её нет
+        if LOG_TO_FILE:
+            os.makedirs(os.path.dirname(cls.FILE_NAME), exist_ok=True)
             with open(cls.FILE_NAME, 'a', encoding='utf-8') as logger_file:
                 logger_file.write(data)
 
@@ -76,17 +75,17 @@ class Logger:
         Логирует HTTP-запрос. Принимает любые параметры через **kwargs.
         Ожидаемые параметры: data, json, headers, cookies, params и др.
         """
-        cls.start_time = time.time()  # Сохраняем время начала
+        cls.start_time = time.time()
 
         test_name = os.environ.get('PYTEST_CURRENT_TEST', 'Unknown Test')
         timestamp = datetime.datetime.now()
 
-        # Извлекаем параметры из kwargs, если они есть. По умолчанию — None.
+        
         data = kwargs.get('data')
         json_body = kwargs.get('json')
         headers = kwargs.get('headers')
         cookies = kwargs.get('cookies')
-        params = kwargs.get('params')  # Для GET-запросов
+        params = kwargs.get('params')
 
         log_message = (
             f"\n----------\n"
@@ -119,9 +118,9 @@ class Logger:
         try:
             result_text = response.json()
         except ValueError:
-            result_text = response.text  # Если не JSON — сохраняем как текст
+            result_text = response.text
 
-        # Форматируем JSON с отступами и поддержкой Unicode
+        
         def safe_json_dumps(obj, indent=4, ensure_ascii=False, sort_keys=True):
             try:
                 return json.dumps(obj, indent=indent, ensure_ascii=ensure_ascii, sort_keys=sort_keys)
