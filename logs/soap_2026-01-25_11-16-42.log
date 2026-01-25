@@ -1,0 +1,54 @@
+
+Test: tests/api/soap_api_tests/test_NumberToWords.py::test_NumberToWords (call)
+------------------- Request --------------------
+Operation: {'address': 'https://www.dataaccess.com/webservicesserver/numberconversion.wso'}
+Options: NumberToWords(ubiNum: xsd:unsignedLong) -> NumberToWordsResult: xsd:string
+Headers: {
+    "SOAPAction": "\"\"",
+    "Content-Type": "text/xml; charset=utf-8"
+}
+--------------------- Body ---------------------
+Body: 
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap-env:Body>
+    <ns0:NumberToWords xmlns:ns0="http://www.dataaccess.com/webservicesserver/">
+      <ns0:ubiNum>123</ns0:ubiNum>
+    </ns0:NumberToWords>
+  </soap-env:Body>
+</soap-env:Envelope>
+
+
+
+------------------- Response --------------------
+Headers: {
+    "Cache-Control": "private, max-age=0",
+    "Content-Type": "text/xml; charset=utf-8",
+    "Content-Encoding": "gzip",
+    "Vary": "Accept-Encoding",
+    "Server": "Server",
+    "Web-Service": "DataFlex 19.1",
+    "X-Powered-By": "ASP.NET",
+    "Access-Control-Allow-Origin": "*",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Robots-Tag": "noai, noimageai",
+    "tdm-reservation": "1",
+    "Content-Security-Policy": "default-src * data: 'unsafe-inline' 'unsafe-eval'; form-action 'self'; frame-ancestors 'self';",
+    "Strict-Transport-Security": "max-age=15768000;includeSubdomains",
+    "X-Content-Type-Options": "nosniff",
+    "Permissions-Policy": "interest-cohort=(); fullscreen=(self)",
+    "Date": "Sun, 25 Jan 2026 08:16:43 GMT",
+    "Content-Length": "326"
+}
+--------------------- Data ----------------------
+Data: 
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">
+      <m:NumberToWordsResult>one hundred and twenty three </m:NumberToWordsResult>
+    </m:NumberToWordsResponse>
+  </soap:Body>
+</soap:Envelope>
+
+---------------- Execution Time -----------------
+Тест: tests/api/soap_api_tests/test_NumberToWords.py::test_NumberToWords (call) выполнялся 0.76 секунд
+
